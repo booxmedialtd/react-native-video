@@ -36,5 +36,6 @@ dependencies {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
-
+    implementation 'com.vualto.vudrm:widevine:0.3.5'
+    implementation 'com.vualto.vudrm:kidplugin:0.3.5'
 }

@@ -3,19 +3,25 @@ package com.brentvatne.exoplayer;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
+import com.google.android.exoplayer2.util.Util;
+import com.vualto.vudrm.widevine.vudrm;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -27,6 +33,10 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
     private static final String PROP_SRC_URI = "uri";
     private static final String PROP_SRC_TYPE = "type";
     private static final String PROP_SRC_HEADERS = "requestHeaders";
+    private static final String PROP_DRM = "drm";
+    private static final String PROP_DRM_TYPE = "type";
+    private static final String PROP_DRM_LICENSESERVER = "licenseServer";
+    private static final String PROP_DRM_TOKEN = "token";
     private static final String PROP_RESIZE_MODE = "resizeMode";
     private static final String PROP_REPEAT = "repeat";
     private static final String PROP_SELECTED_AUDIO_TRACK = "selectedAudioTrack";
@@ -92,6 +102,24 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
                 "ScaleToFill", Integer.toString(ResizeMode.RESIZE_MODE_FILL),
                 "ScaleAspectFill", Integer.toString(ResizeMode.RESIZE_MODE_CENTER_CROP)
         );
+    }
+
+    @ReactProp(name = PROP_DRM)
+    public void setDRM(final ReactExoplayerView videoView, @Nullable ReadableMap drm) {
+        String drmType = drm != null && drm.hasKey(PROP_DRM_TYPE) ? drm.getString(PROP_DRM_TYPE) : null;
+        UUID drmUUID = null;
+        if (drmType != null && drmType.equals("vualto")) {
+            drmUUID = vudrm.widevineDRMSchemeUUID;
+        } else if (drmType != null) {
+            drmUUID = Util.getDrmUuid(drmType);
+        }
+        String drmLicenseServer = drm != null && drm.hasKey(PROP_DRM_LICENSESERVER) ? drm.getString(PROP_DRM_LICENSESERVER) : null;
+        String drmToken = drm != null && drm.hasKey(PROP_DRM_TOKEN) ? drm.getString(PROP_DRM_TOKEN) : null;
+
+        videoView.setDrmUUID(drmUUID);
+        videoView.setDrmLicenseUrl(drmUUID == null ? null : drmLicenseServer);
+        videoView.setDrmToken(drmUUID == null ? null : drmToken);
+        videoView.setUseTextureView(drmUUID == null);
     }
 
     @ReactProp(name = PROP_SRC)
