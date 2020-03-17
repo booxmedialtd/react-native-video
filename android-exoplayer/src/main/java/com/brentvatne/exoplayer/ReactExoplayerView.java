@@ -370,7 +370,7 @@ class ReactExoplayerView extends FrameLayout implements
 
                     DefaultAllocator allocator = new DefaultAllocator(true, C.DEFAULT_BUFFER_SEGMENT_SIZE);
                     DefaultLoadControl defaultLoadControl = new DefaultLoadControl(allocator, minBufferMs, maxBufferMs, bufferForPlaybackMs, bufferForPlaybackAfterRebufferMs, -1, true);
-                    DrmSessionManager<FrameworkMediaCrypto> drmSessionManager = drmSessionManager = buildDrmSessionManager(self.drmUUID, self.srcUri, self.drmLicenseUrl, self.drmToken);
+                    DrmSessionManager<FrameworkMediaCrypto> drmSessionManager = buildDrmSessionManager(self.drmUUID, self.srcUri, self.drmLicenseUrl, self.drmToken);
 
                     player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, defaultLoadControl, drmSessionManager);
                     player.addListener(self);
