@@ -11,4 +11,12 @@
 
   <string name="unrecognized_media_format">Unrecognized media format</string>
 
+  <string name="error_drm_not_supported">error_drm_not_supported</string>
+
+  <string name="error_drm_unknown">error_drm_unknown</string>
+
+  <string name="error_drm_unsupported_scheme">error_drm_unsupported_scheme</string>
+
+  <string name="error_drm_session">error_drm_session</string>
+
 </resources>
