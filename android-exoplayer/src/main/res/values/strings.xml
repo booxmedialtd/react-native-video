@@ -11,12 +11,12 @@
 
   <string name="unrecognized_media_format">Unrecognized media format</string>
 
-  <string name="error_drm_not_supported">Protected content not supported on API levels below 18</string>
+  <string name="error_drm_not_supported">error_drm_not_supported</string>
 
-  <string name="error_drm_unknown">An unknown DRM error occurred</string>
+  <string name="error_drm_unknown">error_drm_unknown</string>
 
-  <string name="error_drm_unsupported_scheme">This device does not support the required DRM scheme</string>
+  <string name="error_drm_unsupported_scheme">error_drm_unsupported_scheme</string>
 
-  <string name="error_drm_session">An error with DRM session occurred</string>
+  <string name="error_drm_session">error_drm_session</string>
 
 </resources>
